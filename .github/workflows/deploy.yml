@@ -1,0 +1,29 @@
+name: Deploy via FTP na Locaweb
+
+on:
+  push:
+    branches:
+      - principal  # Ou a sua branch principal
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    # Opcional: Se seu projeto precisa de build (ex: React, Vue, Laravel Mix)
+    # - name: Install Dependencies & Build
+    #   run: |
+    #     npm install
+    #     npm run build
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ftp.seudominio.com.br
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./ # Ou ./dist se for um projeto compilado
+        server-dir: ${{ vars.FTP_SERVER_DIR }}
