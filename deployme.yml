@@ -3,7 +3,7 @@ name: Deploy via FTP na Locaweb
 on:
   push:
     branches:
-      - main  # Ou a sua branch principal
+      - principal  # Ou a sua branch principal
 
 jobs:
   web-deploy:
